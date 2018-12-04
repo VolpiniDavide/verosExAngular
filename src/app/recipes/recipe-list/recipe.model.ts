@@ -11,4 +11,5 @@ export class Recipe {
       this.imagePath = imgP;
   }
 
+
 }
