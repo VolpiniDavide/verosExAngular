@@ -12,7 +12,8 @@ export class RecipeListComponent implements OnInit {
     new Recipe(
       "Patate riso e cozze",
       " una buona ricetta",
-      "https://ips.plug.it/cips/buonissimo.org/cms/2012/04/tiella-di-riso-patate-e-cozze.jpg"
+      "https://ips.plug.it/cips/buonissimo.org/cms/2012/04/tiella-di-riso-patate-e-cozze.jpg",
+      true
       ),
 
     new Recipe(
@@ -29,7 +30,7 @@ export class RecipeListComponent implements OnInit {
 
     new Recipe(
       "torta",
-      " diabaete prendimi",
+      " diabete prendimi",
       "https://images.lacucinaitaliana.it/wp-content/uploads/2016/09/Torta-di-compleanno.jpg"
     ),
     ];

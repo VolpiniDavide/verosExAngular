@@ -8,7 +8,7 @@ import { Recipe } from '../recipe.model';
 })
 export class RecipeItemComponent implements OnInit {
 
- @Input() currentRicetta: Recipe;
+ @Input() currentRicetta: Recipe; // questa proprietà può venire da fuori, è una finestra
 
   constructor() { }
 
