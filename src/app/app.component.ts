@@ -1,4 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, Output, EventEmitter } from "@angular/core";
+import { NullAstVisitor } from "@angular/compiler";
+import { Recipe } from "./recipes/recipe-list/recipe.model";
 
 @Component({
   selector: "app-root",
@@ -6,5 +8,10 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  title = "craccoPuzza";
+  selectedRecipe: Recipe = null;
+
+  onSelectedRecipe(recipe) {
+    console.log("ricetta ricevuta dal nonno");
+    this.selectedRecipe = recipe;
+  }
 }

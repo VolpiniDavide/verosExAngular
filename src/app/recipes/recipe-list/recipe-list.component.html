@@ -6,7 +6,7 @@
   <app-recipe-item
     *ngFor="let recipe of recipes"
     [currentRicetta]="recipe"
-    (onSelectedItem)="onSelectedList()"
+    (selectedRecipe)="onSelectedList($event)"
   >
   </app-recipe-item>
 </ul>
