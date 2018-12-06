@@ -1,20 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Recipe } from './recipe.model';
+import { Component, OnInit, Output } from "@angular/core";
+import { Recipe } from "./recipe.model";
 
 @Component({
-  selector: 'app-recipe-list',
-  templateUrl: './recipe-list.component.html',
-  styleUrls: ['./recipe-list.component.scss']
+  selector: "app-recipe-list",
+  templateUrl: "./recipe-list.component.html",
+  styleUrls: ["./recipe-list.component.scss"]
 })
 export class RecipeListComponent implements OnInit {
-  recipes: Recipe [] = [
-
+  recipes: Recipe[] = [
     new Recipe(
       "Patate riso e cozze",
       " una buona ricetta",
       "https://ips.plug.it/cips/buonissimo.org/cms/2012/04/tiella-di-riso-patate-e-cozze.jpg",
       true
-      ),
+    ),
 
     new Recipe(
       "pizza",
@@ -26,18 +25,20 @@ export class RecipeListComponent implements OnInit {
       "bistecca",
       " al sangue è meglio",
       "https://carnedistruzzo.it/wp-content/uploads/carne-bistecca-163614.jpg"
-      ),
+    ),
 
     new Recipe(
       "torta",
       " diabete prendimi",
       "https://images.lacucinaitaliana.it/wp-content/uploads/2016/09/Torta-di-compleanno.jpg"
-    ),
-    ];
+    )
+  ];
 
-  constructor() { }
-
-  ngOnInit() {
+  @Output()
+  onSelectedList() {
+    console.log("lista selezionata");
   }
+  constructor() {}
 
+  ngOnInit() {}
 }
