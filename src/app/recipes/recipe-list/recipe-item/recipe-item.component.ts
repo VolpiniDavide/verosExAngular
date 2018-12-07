@@ -1,3 +1,4 @@
+import { RecipesService } from "./../../../recipes.service";
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Recipe } from "../recipe.model";
 
@@ -13,10 +14,11 @@ export class RecipeItemComponent implements OnInit {
 
   onSelectedItem() {
     console.log("ricetta selezionata", this.currentRicetta);
-    this.selectedRecipe.emit(this.currentRicetta);
+    // this.selectedRecipe.emit(this.currentRicetta);
+    this.serv.changeSelectedRecipe(this.currentRicetta);
   }
 
-  constructor() {}
+  constructor(public serv: RecipesService) {}
 
   ngOnInit() {}
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { Recipe } from "./recipe.model";
+import { RecipesService } from "src/app/recipes.service";
 
 @Component({
   selector: "app-recipe-list",
@@ -7,40 +8,27 @@ import { Recipe } from "./recipe.model";
   styleUrls: ["./recipe-list.component.scss"]
 })
 export class RecipeListComponent implements OnInit {
-  recipes: Recipe[] = [
-    new Recipe(
-      "Patate riso e cozze",
-      " una buona ricetta",
-      "https://ips.plug.it/cips/buonissimo.org/cms/2012/04/tiella-di-riso-patate-e-cozze.jpg",
-      true
-    ),
-
-    new Recipe(
-      "pizza",
-      " la più buona di tutte",
-      "https://img.grouponcdn.com/deal/8DDtq5XRzVnLXEUnPHPd/p2-2048x1229/v1/c700x420.jpg"
-    ),
-
-    new Recipe(
-      "bistecca",
-      " al sangue è meglio",
-      "https://carnedistruzzo.it/wp-content/uploads/carne-bistecca-163614.jpg"
-    ),
-
-    new Recipe(
-      "torta",
-      " diabete prendimi",
-      "https://images.lacucinaitaliana.it/wp-content/uploads/2016/09/Torta-di-compleanno.jpg"
-    )
-  ];
-
   @Output() SelectedRecipe = new EventEmitter<Recipe>();
+
+  recipes: Recipe[] = [];
 
   onSelectedList(recipe) {
     console.log("lista selezionata" + recipe);
     this.SelectedRecipe.emit(recipe);
   }
-  constructor() {}
+  constructor(public recipesService: RecipesService) {
+    // mettere questo nel constr è come dire che questo componente dipende dal service
+    recipesService.newRecipes.subscribe(
+      ricetteAggiornate => {
+        console.log(ricetteAggiornate);
+        this.recipes = ricetteAggiornate;
+      },
+
+      function(error) {
+        console.error(error);
+      }
+    );
+  }
 
   ngOnInit() {}
 }
