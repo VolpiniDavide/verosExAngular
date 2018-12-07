@@ -1,3 +1,4 @@
+import { RecipesService } from "src/app/recipes.service";
 import { Recipe } from "./../recipe-list/recipe.model";
 import { Component, OnInit, Input } from "@angular/core";
 
@@ -8,9 +9,17 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class RecipeDetailComponent implements OnInit {
   @Input()
-  currentRicetta: Recipe;
+  currentRicetta: Recipe = null;
 
-  constructor() {}
+  constructor(private service: RecipesService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.service.recipeChanged.subscribe(
+      // qui devo sempre metter i due casi: va male va bene
+      newRecipe => {
+        this.currentRicetta = newRecipe;
+      },
+      error => console.error(error)
+    );
+  }
 }

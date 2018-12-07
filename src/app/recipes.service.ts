@@ -10,6 +10,8 @@ export class RecipesService {
 
   newRecipes = new EventEmitter<Recipe[]>();
 
+  recipeChanged = new EventEmitter<Recipe>();
+
   recipes: Recipe[] = [];
 
   selectedRecipe: Recipe = null;
@@ -17,6 +19,7 @@ export class RecipesService {
   changeSelectedRecipe(ricetta: Recipe) {
     console.log("changeSelectedRecipe", ricetta);
     this.selectedRecipe = ricetta;
+    this.recipeChanged.emit(this.selectedRecipe);
   }
 
   searchRecipes(searchTerm: string = "cake") {
@@ -26,17 +29,19 @@ export class RecipesService {
       .then((resp: { meals: [] }) => {
         // resp sarà un oggetto ( Preso da internet ) che contiene una proprietà array chiamata meals
         console.log("ricette ricevutissime", resp);
-        this.recipes = resp.meals.map(function(meal: any) {
-          // metto any percheè sennò mi dà errore perchè non conosce l'oggetto, ma compila comunque
-          const myRecipe = new Recipe(
-            meal.strMeal,
-            meal.strInstructions,
-            meal.strMealThumb
-          );
-          return myRecipe;
-        });
-        console.log("recipes rimappate", this.recipes);
-
+        if (resp.meals) {
+          this.recipes = resp.meals.map(function(meal: any) {
+            // metto any percheè sennò mi dà errore perchè non conosce l'oggetto, ma compila comunque
+            const myRecipe = new Recipe(
+              meal.strMeal,
+              meal.strInstructions,
+              meal.strMealThumb
+            );
+            return myRecipe;
+          });
+        } else {
+          console.log("recipes rimappate", this.recipes);
+        }
         this.newRecipes.emit(this.recipes);
       })
       .catch(error => {

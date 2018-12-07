@@ -1,9 +1,13 @@
-<li class="list-group-item" (click)="onSelectedItem()">
-  <img
-    class="card-img-top"
-    [src]="currentRicetta.imagePath"
-    style="width:100px;height:auto;"
-  />
-  <h5 class="card-title">{{ currentRicetta.name }}</h5>
-  <app-like [isLiked]="currentRicetta.liked"></app-like>
+<li class="item-recipe row" (click)="onSelectedItem()" class="item-recipes">
+  <div class="col">
+    <img
+      class="img-thumbnail"
+      [src]="currentRicetta.imagePath"
+      style="width:100px;height:auto;"
+    />
+  </div>
+  <div class="col-9">
+    <h5 class="card-title">{{ currentRicetta.name }}</h5>
+  </div>
+  <div class="col"><app-like [isLiked]="currentRicetta.liked"></app-like></div>
 </li>
